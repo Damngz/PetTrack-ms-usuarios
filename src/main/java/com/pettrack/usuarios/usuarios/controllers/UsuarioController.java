@@ -1,5 +1,7 @@
 package com.pettrack.usuarios.usuarios.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +21,11 @@ import com.pettrack.usuarios.usuarios.repositories.UsuarioRepository;
 public class UsuarioController {
   @Autowired
   private UsuarioRepository usuarioRepository;
+
+  @GetMapping("/tutores")
+  public ResponseEntity<List<Usuario>> getUsuariosTutores() {
+    return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.usuario));
+  }
 
   @GetMapping("/{id}")
   public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {

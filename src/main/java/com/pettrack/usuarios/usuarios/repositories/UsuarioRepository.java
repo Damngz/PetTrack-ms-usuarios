@@ -1,5 +1,6 @@
 package com.pettrack.usuarios.usuarios.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,6 @@ import com.pettrack.usuarios.usuarios.models.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
   Optional<Usuario> findByCorreo(String correo);
   Optional<Usuario> findByRut(String rut);
+  List<Usuario> findByRol(Usuario.Rol rol);
 }
 
