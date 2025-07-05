@@ -27,6 +27,11 @@ public class UsuarioController {
     return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.usuario));
   }
 
+  @GetMapping("/veterinarios")
+  public ResponseEntity<List<Usuario>> getUsuariosVeterinarios() {
+    return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.veterinario));
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
     return usuarioRepository.findById(id)
