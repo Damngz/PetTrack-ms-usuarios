@@ -22,6 +22,11 @@ public class UsuarioController {
   @Autowired
   private UsuarioRepository usuarioRepository;
 
+  @GetMapping
+  public ResponseEntity<List<Usuario>> getAllUsuarios() {
+    return ResponseEntity.ok(usuarioRepository.findAll());
+  }
+
   @GetMapping("/tutores")
   public ResponseEntity<List<Usuario>> getUsuariosTutores() {
     return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.usuario));
