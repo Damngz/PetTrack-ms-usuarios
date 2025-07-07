@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pettrack.usuarios.usuarios.models.Usuario;
 import com.pettrack.usuarios.usuarios.services.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/usuarios")
@@ -52,7 +54,7 @@ public class UsuarioController {
   }
 
   @PostMapping
-  public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
+  public ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario) {
     return ResponseEntity.ok(usuarioService.saveUsuario(usuario));
   }
 }
