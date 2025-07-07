@@ -8,6 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuario")
@@ -18,18 +22,23 @@ public class Usuario {
   private Long id;
 
   @Column
+  @NotBlank(message = "El nombre no puede estar vacío")
+  @Size(max = 100, message = "El nombre no puede exceder los 100 caracteres")
   private String nombre;
 
   @Column
   private String apellido;
 
   @Column
+  @Pattern(regexp = "\\d{7,8}-[\\dkK]", message = "RUT inválido")
   private String rut;
 
   @Column
+  @Email(message = "Correo inválido")
   private String correo;
 
   @Column
+  @Pattern(regexp = "\\+56\\d{9}", message = "Teléfono inválido")
   private String telefono;
 
   @Column

@@ -13,46 +13,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pettrack.usuarios.usuarios.models.Usuario;
-import com.pettrack.usuarios.usuarios.repositories.UsuarioRepository;
+import com.pettrack.usuarios.usuarios.services.UsuarioService;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
   @Autowired
-  private UsuarioRepository usuarioRepository;
+  private UsuarioService usuarioService;
 
   @GetMapping
   public ResponseEntity<List<Usuario>> getAllUsuarios() {
-    return ResponseEntity.ok(usuarioRepository.findAll());
+    return ResponseEntity.ok(usuarioService.findAll());
   }
 
   @GetMapping("/tutores")
   public ResponseEntity<List<Usuario>> getUsuariosTutores() {
-    return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.usuario));
+    return ResponseEntity.ok(usuarioService.findByRol(Usuario.Rol.usuario));
   }
 
   @GetMapping("/veterinarios")
   public ResponseEntity<List<Usuario>> getUsuariosVeterinarios() {
-    return ResponseEntity.ok(usuarioRepository.findByRol(Usuario.Rol.veterinario));
+    return ResponseEntity.ok(usuarioService.findByRol(Usuario.Rol.veterinario));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
-    return usuarioRepository.findById(id)
+    return usuarioService.findById(id)
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }
 
   @GetMapping("/correo/{correo}")
   public ResponseEntity<Usuario> getUsuarioByCorreo(@PathVariable String correo) {
-    return usuarioRepository.findByCorreo(correo)
+    return usuarioService.findByCorreo(correo)
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }
 
   @PostMapping
   public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
-    return ResponseEntity.ok(usuarioRepository.save(usuario));
+    return ResponseEntity.ok(usuarioService.saveUsuario(usuario));
   }
 }
