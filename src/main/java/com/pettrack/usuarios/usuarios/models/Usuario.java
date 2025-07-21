@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -47,6 +48,7 @@ public class Usuario {
   @Enumerated(EnumType.STRING)
   private Rol rol;
 
+  @SuppressWarnings("squid:S00115")
   public enum Rol {
     usuario,
     veterinario

@@ -3,7 +3,6 @@ package com.pettrack.usuarios.usuarios.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pettrack.usuarios.usuarios.models.Usuario;
@@ -11,7 +10,6 @@ import com.pettrack.usuarios.usuarios.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-  @Autowired
   private UsuarioRepository usuarioRepository;
 
   public List<Usuario> findAll() {

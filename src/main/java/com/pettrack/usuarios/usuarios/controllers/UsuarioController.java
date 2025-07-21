@@ -2,7 +2,6 @@ package com.pettrack.usuarios.usuarios.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,12 @@ import jakarta.validation.Valid;
 @CrossOrigin
 @RequestMapping("/usuarios")
 public class UsuarioController {
-  @Autowired
+
   private UsuarioService usuarioService;
+
+  public UsuarioController(UsuarioService usuarioService) {
+    this.usuarioService = usuarioService;
+  }
 
   @GetMapping
   public ResponseEntity<List<Usuario>> getAllUsuarios() {
@@ -42,15 +45,15 @@ public class UsuarioController {
   @GetMapping("/{id}")
   public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
     return usuarioService.findById(id)
-      .map(ResponseEntity::ok)
-      .orElse(ResponseEntity.notFound().build());
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @GetMapping("/correo/{correo}")
   public ResponseEntity<Usuario> getUsuarioByCorreo(@PathVariable String correo) {
     return usuarioService.findByCorreo(correo)
-      .map(ResponseEntity::ok)
-      .orElse(ResponseEntity.notFound().build());
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @PostMapping
